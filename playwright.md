@@ -34,7 +34,6 @@ page.waitForSelector("a");
 
 # Expect
 
-```
-
-await expect(page.getByTitle('Issues count')).toHaveText('25 issues');
+```javascript
+await expect(page.getByTitle("Issues count")).toHaveText("25 issues");
 ```

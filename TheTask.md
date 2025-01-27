@@ -36,3 +36,62 @@ requirements, error messages should show.
 ● Once you submit the personal-info page (with valid
 data) you may be navigated to a 2FA page. Don’t
 automate that. Finish the test after seeing this page.
+
+**Please include extra manual test cases that you would
+perform as part of a testing feature like this.
+We’re looking for:  
+● Structured tests  
+● Attention to detail  
+● Be able to share the code/access with us to evaluate your work.**
+
+Have to do.
+N.B.: Page Object model
+
+// Test parameterisation
+
+import { test } from '@playwright/test';
+
+test.describe('Login Tests', () => {
+const users = [
+{ username: 'validUser', password: 'password123', shouldPass: true },
+{ username: 'invalidUser', password: 'wrongpass', shouldPass: false },
+];
+
+    for (const user of users) {
+        test(`Login test for ${user.username}`, async ({ page }) => {
+            await page.goto('/login');
+            await page.fill('#username', user.username);
+            await page.fill('#password', user.password);
+            await page.click('button[type="submit"]');
+
+            if (user.shouldPass) {
+                expect(page.url()).toBe('/dashboard');
+            } else {
+                const error = await page.textContent('.error');
+                expect(error).toContain('Invalid credentials');
+            }
+        });
+    }
+
+});
+
+/// Hooks 5. Leverage Test Hooks
+Use hooks (beforeEach, afterEach, beforeAll, afterAll) for repetitive setup and teardown logic.
+
+Example:
+
+import { test } from '@playwright/test';
+
+test.beforeEach(async ({ page }) => {
+await page.goto('/login');
+});
+
+test('login successfully', async ({ page }) => {
+await page.fill('#username', 'testuser');
+await page.fill('#password', 'password');
+await page.click('button[type="submit"]');
+expect(page.url()).toBe('/dashboard');
+});
+
+// TODO: Should noyt be able to register a previously created user
+// TODO: How to prove? Is error message enough?
