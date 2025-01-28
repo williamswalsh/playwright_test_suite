@@ -1,10 +1,12 @@
 "use strict";
 import { test, expect } from "@playwright/test";
+import { randomUUIDWorkEmail } from "../utils/Randomize.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/app/business-signup");
 });
 
+// A work email is an email that does not have the personal email domains gmail, hotmail etc. e.g. john@work.com
 test('Email error should appear when email address is not a "work email".', async ({
   page,
 }) => {
@@ -21,7 +23,9 @@ test('Email error should appear when email address is not a "work email".', asyn
   ).toBeVisible();
 });
 
-// Test with multiple invalid email addresses
+/**
+ * This parameterised test will check multiple invalid email addresses.
+ */
 [
   { email: "plainaddress" },
   { email: "#@%^%#$@#$@#.com" },
@@ -54,30 +58,8 @@ test('Email error should appear when email address is not a "work email".', asyn
   });
 });
 
-test("Email error should appear when email account already exists.", async ({
-  page,
-}) => {
-  await page
-    .getByTestId("registration-email")
-    .fill("already.created.email@example.com");
-
-  await page.getByTestId("submit-button").click();
-  await page.getByTestId("registration-password").fill("Password1!");
-  await page.getByTestId("registration-terms").click();
-  await page.getByTestId("email-sign-up").click();
-
-  await expect(page.getByTestId("login-to-continue-link")).toBeVisible();
-  await expect(
-    page
-      .getByTestId("registration-email-subtext-container")
-      .locator("span")
-      .getByText("This account already exists.")
-  ).toBeVisible();
-});
-
 /**
  * This parameterised test will check the different criteria that is expected of the passwords that should be submitted.
- *
  */
 [
   {
@@ -120,13 +102,54 @@ test("Email error should appear when email account already exists.", async ({
   });
 });
 
-test("Submit button should be disabled when terms and conditions checkbox hasn't been checked.", async ({
+// This test expects that the email address already.created.email@work.com already exists.
+test("Email error should appear when email account already exists.", async ({
   page,
 }) => {
   await page
     .getByTestId("registration-email")
-    .fill("work.email.example@work.com");
+    .fill("already.created.email@work.com");
 
+  await page.getByTestId("submit-button").click();
+  await page.getByTestId("registration-password").fill("Password1!");
+  await page.getByTestId("registration-terms").click();
+  await page.getByTestId("email-sign-up").click();
+
+  if (
+    page
+      .getByTestId("registration-email-subtext-container")
+      .locator("span")
+      .getByText("This account already exists.")
+      .isVisible()
+  ) {
+    // Test success: Email is already registered -> error already present -> can exit test here.
+    await expect(page.getByTestId("login-to-continue-link")).toBeVisible();
+    return;
+  }
+
+  // Email is not registered -> will reregister the email and check for the duplicate email error.
+  await page
+    .getByTestId("registration-email")
+    .fill("already.created.email@work.com");
+
+  await page.getByTestId("submit-button").click();
+  await page.getByTestId("registration-password").fill("Password1!");
+  await page.getByTestId("registration-terms").click();
+  await page.getByTestId("email-sign-up").click();
+
+  await expect(page.getByTestId("login-to-continue-link")).toBeVisible();
+  await expect(
+    page
+      .getByTestId("registration-email-subtext-container")
+      .locator("span")
+      .getByText("This account already exists.")
+  ).toBeVisible();
+});
+
+test("Submit button should be disabled when terms and conditions checkbox hasn't been checked.", async ({
+  page,
+}) => {
+  await page.getByTestId("registration-email").fill(`${randomUUIDWorkEmail()}`);
   await page.getByTestId("submit-button").click();
   await page.getByTestId("registration-password").fill("Password1!");
 
@@ -142,7 +165,7 @@ test("User should be redirected to login when browsing directly to personal-info
 });
 
 // Each field should show an error message if they are unpopulated
-test.only("Work Email field should show an error message if they are unpopulated", async ({
+test("Work Email field should show an error message if they are unpopulated", async ({
   page,
 }) => {
   await page.getByTestId("submit-button").click();
@@ -155,61 +178,46 @@ test.only("Work Email field should show an error message if they are unpopulated
 });
 
 // Each field should show an error message if they are unpopulated
-test.only("Password field when empty must show an error message, the text will be red.", async ({
+test("Password field when empty must show an error message, the text will be red.", async ({
   page,
 }) => {
+  await page.getByTestId("registration-email").fill(`${randomUUIDWorkEmail()}`);
   await page.getByTestId("submit-button").click();
+  await page.getByTestId("registration-password").click();
+  await page.getByTestId("registration-terms").click();
 
-  await expect(
-    page
-      .getByTestId("form-input-wrapper-error-text")
-      .getByText("Please enter an email address.")
-  ).toBeVisible();
+  const redHexCode = "#D13B15";
+  let textColor = await page
+    .getByText("at least 8 characters")
+    .getAttribute("color");
+  expect(textColor).toBe(redHexCode);
+
+  textColor = await page.getByText("a number").getAttribute("color");
+  expect(textColor).toBe(redHexCode);
+
+  textColor = await page.getByText("a special character").getAttribute("color");
+  expect(textColor).toBe(redHexCode);
+
+  textColor = await page
+    .getByText("upper and lower case")
+    .getAttribute("color");
+  expect(textColor).toBe(redHexCode);
 });
 
-test("Happy Path", async ({ page }) => {
-  await page
-    .getByTestId("registration-email")
-    .fill("jessica.smith24@example.com");
+// Takes a screenshot to capture personal information page.
+test("Business Signup success.", async ({ page }) => {
+  const workEmail = randomUUIDWorkEmail();
+  await page.getByTestId("registration-email").fill(workEmail);
   await page.getByTestId("submit-button").click();
   await page.getByTestId("registration-password").fill("Password1!");
   await page.getByTestId("registration-terms").click();
   await page.getByTestId("email-sign-up").click();
 
   await expect(page).toHaveTitle("Weel");
-  await expect(page).toHaveURL(
-    "https://app-moccona.letsweel.com/app/personal-info"
-  );
-
-  //   Debug statement - progress to this point
-  //   await page.pause();
-
-  await page.getByTestId("input-first-name").fill("William");
-  await page.getByTestId("input-last-name").fill("Walsh");
-  await page.selectOption("select.PhoneInputCountrySelect", "AU");
-
-  //   await page.pause();
-
-  //   TODO: Do a failing case for the phone number
-  // Helper function: isValidPhoneNumber?
-  await page.fill("input.PhoneInputInput", "0423444444");
-
-  //   await page.pause();
-
-  // TODO: Failing case entering non valid numbers like day - 0, 32+, month 0, 13+, year not future year valid values > age restrictions?
-  // TODO: Failing case entering non numbers
-  // TODO: Failing case entering decimals
-  // TODO: Failing case - etc.
-  await page.fill('input[name="day"]', "26");
-  await page.fill('input[name="month"]', "10");
-  await page.fill('input[name="year"]', "1980");
-
-  //   await page.pause();
-
-  await page.getByTestId("next-button").click();
+  await expect(page).toHaveURL("/app/personal-info");
 
   await page.screenshot({
-    path: "../screenshots/mfa_page.png",
+    path: "tests/screenshots/personal_info.png",
     fullPage: true,
   });
 });

@@ -12,5 +12,140 @@
 // 2nd page:
 // https://app-moccona.letsweel.com/app/personal-info -> reidrected to login
 
+Payload submitted after personal-info page is submitted:
+{"email":"william.stephen.walsh33@work.com","first*name":"William","last_name":"Walsh","phone_number":"+61423443204","date_of_birth":"1990-11-11"}
+fetch("https://develop.api.divipay.com/api/me/", {
+"headers": {
+"accept": "application/json, text/plain, */\_",
+"accept-language": "en-GB,en;q=0.9,de-DE;q=0.8,de;q=0.7,en-US;q=0.6",
+"authorization": "Bearer eyJraWQiOiJmajdZMFZEdUdneWlaSDY1bENnQ3k5ZllNWVNsekVITk9iaDNtSnkyMGlFPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI4ZjMzZDgwYS0zNzYwLTQxYTktODk2NC0zYjVlZTgzYjE2ZDciLCJkZXZpY2Vfa2V5IjoiYXAtc291dGhlYXN0LTJfOGY2ZjMyMGMtMzdjMS00YTllLWJhZjktMmRiMTA2NzY0MWQ1IiwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmFwLXNvdXRoZWFzdC0yLmFtYXpvbmF3cy5jb21cL2FwLXNvdXRoZWFzdC0yXzJxQjBTaWRNQyIsImNsaWVudF9pZCI6IjQzcW85NjV0ajF1N21vYXU1ajdvOTgzOWRpIiwib3JpZ2luX2p0aSI6ImNmMjIwNGVkLTkwNjMtNDc1My04ZDkzLTk3MWZiYjI5MDc0ZiIsImV2ZW50X2lkIjoiZjE5ZjI0OGYtZDU4Mi00ODk0LWJiNjEtN2Q0NzNjNDc0MzQzIiwidG9rZW5fdXNlIjoiYWNjZXNzIiwic2NvcGUiOiJhd3MuY29nbml0by5zaWduaW4udXNlci5hZG1pbiIsImF1dGhfdGltZSI6MTczODAxNTc3NiwiZXhwIjoxNzM4MDE3NTc2LCJpYXQiOjE3MzgwMTU3NzYsImp0aSI6ImI5ODRhNDdhLWY3ZDAtNDUzNS05NzhhLTU4YjIzYmNlN2ZhZiIsInVzZXJuYW1lIjoiOGYzM2Q4MGEtMzc2MC00MWE5LTg5NjQtM2I1ZWU4M2IxNmQ3In0.Jo2B-\_KHySw-dLOp82SPYBXYgn9LcIrtC0Z9TvPb2pwIN8jnVu-CxCapQA7728kUnzEFGms3qvWmdZyw4SH2-wGgoVNO-e_43SGKPdwHAZ5b851PFcolTFHgbnQyPjB05P0LdVoWxqk0daXfponYbVK4r0Oduj9a682_yU_8536W2bpe4Fni3UMR9RQlkUKzQ1UnqVBdf3GzXUyY0fP0jS8leX9CPFKOA1HuRbN6b802WyWr8aOsg3yOZsq3BFIlYDPdfrF5uqQ1nOsqMnKF9HXbkkuBSK6zQ8zMgsHIjVkoP9bxKyIdJCFe6VCKyj-X1ocVa60aTfUhwVfTodh8zQ",
+"cache-control": "no-cache",
+"content-type": "application/json;charset=UTF-8",
+"pragma": "no-cache",
+"priority": "u=1, i",
+"sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+"sec-ch-ua-mobile": "?0",
+"sec-ch-ua-platform": "\"macOS\"",
+"sec-fetch-dest": "empty",
+"sec-fetch-mode": "cors",
+"sec-fetch-site": "cross-site",
+"Referer": "https://app-moccona.letsweel.com/",
+"Referrer-Policy": "strict-origin-when-cross-origin"
+},
+"body": "{\"email\":\"william.stephen.walsh33@work.com\",\"first_name\":\"William\",\"last_name\":\"Walsh\",\"phone_number\":\"+61423443204\",\"date_of_birth\":\"1990-11-11\"}",
+"method": "PATCH"
+});
+
+curl 'https://develop.api.divipay.com/api/me/' \
+ -X 'OPTIONS' \
+ -H 'accept: _/_' \
+ -H 'accept-language: en-GB,en;q=0.9,de-DE;q=0.8,de;q=0.7,en-US;q=0.6' \
+ -H 'access-control-request-headers: authorization,content-type' \
+ -H 'access-control-request-method: PATCH' \
+ -H 'cache-control: no-cache' \
+ -H 'origin: https://app-moccona.letsweel.com' \
+ -H 'pragma: no-cache' \
+ -H 'priority: u=1, i' \
+ -H 'referer: https://app-moccona.letsweel.com/' \
+ -H 'sec-fetch-dest: empty' \
+ -H 'sec-fetch-mode: cors' \
+ -H 'sec-fetch-site: cross-site' \
+ -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+
+curl 'https://develop.api.divipay.com/api/me/' \
+ -X 'PATCH' \
+ -H 'accept: application/json, text/plain, _/_' \
+ -H 'accept-language: en-GB,en;q=0.9,de-DE;q=0.8,de;q=0.7,en-US;q=0.6' \
+ -H 'authorization: Bearer eyJraWQiOiJmajdZMFZEdUdneWlaSDY1bENnQ3k5ZllNWVNsekVITk9iaDNtSnkyMGlFPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI4ZjMzZDgwYS0zNzYwLTQxYTktODk2NC0zYjVlZTgzYjE2ZDciLCJkZXZpY2Vfa2V5IjoiYXAtc291dGhlYXN0LTJfOGY2ZjMyMGMtMzdjMS00YTllLWJhZjktMmRiMTA2NzY0MWQ1IiwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmFwLXNvdXRoZWFzdC0yLmFtYXpvbmF3cy5jb21cL2FwLXNvdXRoZWFzdC0yXzJxQjBTaWRNQyIsImNsaWVudF9pZCI6IjQzcW85NjV0ajF1N21vYXU1ajdvOTgzOWRpIiwib3JpZ2luX2p0aSI6ImNmMjIwNGVkLTkwNjMtNDc1My04ZDkzLTk3MWZiYjI5MDc0ZiIsImV2ZW50X2lkIjoiZjE5ZjI0OGYtZDU4Mi00ODk0LWJiNjEtN2Q0NzNjNDc0MzQzIiwidG9rZW5fdXNlIjoiYWNjZXNzIiwic2NvcGUiOiJhd3MuY29nbml0by5zaWduaW4udXNlci5hZG1pbiIsImF1dGhfdGltZSI6MTczODAxNTc3NiwiZXhwIjoxNzM4MDE3NTc2LCJpYXQiOjE3MzgwMTU3NzYsImp0aSI6ImI5ODRhNDdhLWY3ZDAtNDUzNS05NzhhLTU4YjIzYmNlN2ZhZiIsInVzZXJuYW1lIjoiOGYzM2Q4MGEtMzc2MC00MWE5LTg5NjQtM2I1ZWU4M2IxNmQ3In0.Jo2B-\_KHySw-dLOp82SPYBXYgn9LcIrtC0Z9TvPb2pwIN8jnVu-CxCapQA7728kUnzEFGms3qvWmdZyw4SH2-wGgoVNO-e_43SGKPdwHAZ5b851PFcolTFHgbnQyPjB05P0LdVoWxqk0daXfponYbVK4r0Oduj9a682_yU_8536W2bpe4Fni3UMR9RQlkUKzQ1UnqVBdf3GzXUyY0fP0jS8leX9CPFKOA1HuRbN6b802WyWr8aOsg3yOZsq3BFIlYDPdfrF5uqQ1nOsqMnKF9HXbkkuBSK6zQ8zMgsHIjVkoP9bxKyIdJCFe6VCKyj-X1ocVa60aTfUhwVfTodh8zQ' \
+ -H 'cache-control: no-cache' \
+ -H 'content-type: application/json;charset=UTF-8' \
+ -H 'dnt: 1' \
+ -H 'origin: https://app-moccona.letsweel.com' \
+ -H 'pragma: no-cache' \
+ -H 'priority: u=1, i' \
+ -H 'referer: https://app-moccona.letsweel.com/' \
+ -H 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"' \
+ -H 'sec-ch-ua-mobile: ?0' \
+ -H 'sec-ch-ua-platform: "macOS"' \
+ -H 'sec-fetch-dest: empty' \
+ -H 'sec-fetch-mode: cors' \
+ -H 'sec-fetch-site: cross-site' \
+ -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \
+ --data-raw '{"email":"william.stephen.walsh33@work.com","first_name":"William","last_name":"Walsh","phone_number":"+61423443204","date_of_birth":"1990-11-11"}'
+{"status": "STEP_UP_REQUIRED"}
+
+curl 'https://develop.api.divipay.com/authorisation/initiate-step-up/' \
+ -X 'OPTIONS' \
+ -H 'accept: _/_' \
+ -H 'accept-language: en-GB,en;q=0.9,de-DE;q=0.8,de;q=0.7,en-US;q=0.6' \
+ -H 'access-control-request-headers: authorization,content-type' \
+ -H 'access-control-request-method: POST' \
+ -H 'cache-control: no-cache' \
+ -H 'origin: https://app-moccona.letsweel.com' \
+ -H 'pragma: no-cache' \
+ -H 'priority: u=1, i' \
+ -H 'referer: https://app-moccona.letsweel.com/' \
+ -H 'sec-fetch-dest: empty' \
+ -H 'sec-fetch-mode: cors' \
+ -H 'sec-fetch-site: cross-site' \
+ -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+
 // TODO: http redirect to https site should work
 // http://app-moccona.letsweel.com/app/business-signup
+
+// Debug statement - progress to this point
+// await page.pause();
+
+# Things to do
+
+```javascript
+// Understand why the option to launch in headless mode is created in the script itself and not via command line
+// Doesn't seem like a good idea
+const browser = await chromium.launch({ headless: false });
+```
+
+// TODO: generate unique email using sequential numbers?
+// TODO: Create list of valid domains for a "work email"
+// TODO: Understand the object hierarchy
+
+// await page.close();
+
+// TODO: Understand the object hierarchy - chromium->context->page etc..
+// Should I be constructing those objects
+// how to construct them with cross browser tests?
+// Close the browser
+// await browser.close();
+
+// test('login successfully', async ({ page }) => {
+// await page.fill('#username', 'testuser');
+// await page.fill('#password', 'password');
+// await page.click('button[type="submit"]');
+// expect(page.url()).toBe('/dashboard');
+// });
+
+// test.describe('Business Signup with work email', () => {
+// const users = [
+// { username: 'validUser', password: 'password123', shouldPass: true },
+// { username: 'invalidUser', password: 'wrongpass', shouldPass: false },
+// ];
+
+// Invalid emails should be rejected
+//
+// william.work.com
+// william@.com
+// william@work.
+// william@workcom
+// list of Invalid Email Addresses
+
+// App did not reject this email:accepted
+// email@111.222.333.44444 - Invalid email format: the domain part of the email address does not comply with IETF standards.
+// email@example.web -> valid email
+// Error: page.goto: net::ERR_INTERNET_DISCONNECTED at https://app-moccona.letsweel.com/app/business-signup
+// Call log:
+// - navigating to "https://app-moccona.letsweel.com/app/business-signup", waiting until "load"
+
+First Name restrictions -> no numbers or special character other than '
+last name restriction -> can have numbers & special character other than '
+
+expect ().tohaveValue()
+expect ().not.tohaveCount() Count dropdown options
