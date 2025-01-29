@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
-import { randomUUIDWorkEmail } from "../tests/utils/Randomize";
+// import { randomUUIDWorkEmail } from "../tests/utils/Randomize";
+import { randomUUIDWorkEmail } from "../tests/utils/Randomize.js";
 
 export class SignUpPage {
   constructor(page) {
