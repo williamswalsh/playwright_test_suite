@@ -311,19 +311,15 @@ test("Tests with tomorrows date. Cannot have date in future.", async ({
   ).toBeVisible();
 });
 
-test("Happy path", async ({ page }) => {
+test.only("Happy path", async ({ page }) => {
   await page.getByTestId("input-first-name").fill("William");
   await page.getByTestId("input-last-name").fill("Walsh");
   await page.selectOption("select.PhoneInputCountrySelect", "AU");
   await page.fill("input.PhoneInputInput", "0423444444");
 
-  // TODO: Failing case entering decimals
-  // TODO: Failing case - etc.
   await page.fill('input[name="day"]', "26");
   await page.fill('input[name="month"]', "10");
   await page.fill('input[name="year"]', "1980");
-
-  await page.pause();
 
   await page.getByTestId("next-button").click();
 
@@ -332,6 +328,8 @@ test("Happy path", async ({ page }) => {
     fullPage: true,
   });
 });
+
+// TODO: DOB: Failing case entering text, decimals, special characters
 
 test.afterEach(async ({ page }) => {
   await page.close();
