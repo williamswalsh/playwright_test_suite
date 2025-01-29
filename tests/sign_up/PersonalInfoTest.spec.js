@@ -273,11 +273,13 @@ test("Tests with current date. User needs to be 18+.", async ({ page }) => {
   ).toBeVisible();
 });
 
+// TODO: test fails intermittently.
+// when running by itself -> it passes
+// when running with other tests -> it fails
 test("Tests with tomorrows date. Cannot have date in future.", async ({
   page,
 }) => {
   const date = getTomorrowsDate();
-
   await page.fill('input[name="day"]', `${date.day}`);
   await page.fill('input[name="month"]', `${date.month}`);
   await page.fill('input[name="year"]', `${date.year}`);
