@@ -52,10 +52,60 @@ https://app-moccona.letsweel.com/app/verify-business
 https://app-moccona.letsweel.com/app/login
 ```
 
+### Information
+
+- The app did not reject this email with the expected response code: email@111.222.333.44444  
+  Response code: 504 Gateway Timeout  
+  The domain part of the email address does not comply with IETF standards.
+  ![alt text](tests/screenshots/504_gateway_timeout.png)
+- When my internet modem shutdown, my connection to the internet stopped, this is the output logged by playwright.
+  ```
+  Error: page.goto: net::ERR_INTERNET_DISCONNECTED at
+  https://app-moccona.letsweel.com/app/business-signup
+  ```
+
 ### Improvements
 
 - Add description to invalid email addressed giving the reason why its invalid - use sendgrid to check this
 - Use Faker javascript library to generate fake data
+- Create list of valid or invalid domains for a "work email"
+
+# Things to do
+
+```javascript
+// Understand why the option to launch in headless mode is created in the script itself and not via command line
+// Doesn't seem like a good idea
+const browser = await chromium.launch({ headless: false });
+```
+
+// TODO: Understand the object hierarchy - chromium->context->page etc..
+// Should I be constructing those objects
+// how to construct them with cross browser tests?
+
+// Call log:
+// - navigating to "https://app-moccona.letsweel.com/app/business-signup", waiting until "load"
+
+First Name restrictions -> no numbers or special character other than '
+last name restriction -> can have numbers & special character other than 'as
+
+expect ().tohaveValue()
+expect ().not.tohaveCount() Count dropdown options
+
+---
+
+App uses cognito to authenticate and authorize users.
+
+https://app-moccona.letsweel.com/app/business-compliance#landingPage
+![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_landing_page.png)
+
+https://app-moccona.letsweel.com/app/business-compliance#applicantDetails
+![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_applicant_details.png)
+
+https://app-moccona.letsweel.com/app/business-compliance#privateCompany_businessDetails
+![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_business_details.png)
+
+Connection error??
+![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_business_details_connection_error.png)
 
 ## REST requests
 
@@ -138,68 +188,3 @@ curl 'https://develop.api.divipay.com/authorisation/initiate-step-up/' \
  -H 'sec-fetch-site: cross-site' \
  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
 ```
-
-// Debug statement - progress to this point
-// await page.pause();
-
-# Things to do
-
-```javascript
-// Understand why the option to launch in headless mode is created in the script itself and not via command line
-// Doesn't seem like a good idea
-const browser = await chromium.launch({ headless: false });
-```
-
-// TODO: generate unique email using sequential numbers?
-// TODO: Create list of valid domains for a "work email"
-// TODO: Understand the object hierarchy
-
-// await page.close();
-
-// TODO: Understand the object hierarchy - chromium->context->page etc..
-// Should I be constructing those objects
-// how to construct them with cross browser tests?
-// Close the browser
-// await browser.close();
-
-// test('login successfully', async ({ page }) => {
-// await page.fill('#username', 'testuser');
-// await page.fill('#password', 'password');
-// await page.click('button[type="submit"]');
-// expect(page.url()).toBe('/dashboard');
-// });
-
-// test.describe('Business Signup with work email', () => {
-// const users = [
-// { username: 'validUser', password: 'password123', shouldPass: true },
-// { username: 'invalidUser', password: 'wrongpass', shouldPass: false },
-// ];
-
-// App did not reject this email:accepted
-// email@111.222.333.44444 - Invalid email format: the domain part of the email address does not comply with IETF standards.
-// email@example.web -> valid email
-// Error: page.goto: net::ERR_INTERNET_DISCONNECTED at https://app-moccona.letsweel.com/app/business-signup
-// Call log:
-// - navigating to "https://app-moccona.letsweel.com/app/business-signup", waiting until "load"
-
-First Name restrictions -> no numbers or special character other than '
-last name restriction -> can have numbers & special character other than 'as
-
-expect ().tohaveValue()
-expect ().not.tohaveCount() Count dropdown options
-
----
-
-App uses cognito to authenticate and authorize users.
-
-https://app-moccona.letsweel.com/app/business-compliance#landingPage
-![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_landing_page.png)
-
-https://app-moccona.letsweel.com/app/business-compliance#applicantDetails
-![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_applicant_details.png)
-
-https://app-moccona.letsweel.com/app/business-compliance#privateCompany_businessDetails
-![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_business_details.png)
-
-Connection error??
-![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_business_details_connection_error.png)
