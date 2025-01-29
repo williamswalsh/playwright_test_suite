@@ -1,17 +1,27 @@
-# Sitemap
+# Weel Playwright Test Suite
 
-// Enter ABN & logout option, ABN regex verification:
-// https://app-moccona.letsweel.com/app/business-info
-// Then verify business page:
-// https://app-moccona.letsweel.com/app/verify-business
+### Sitemap
 
-// SAME:
-// https://app-moccona.letsweel.com/app/login -> login
-// https://app-moccona.letsweel.com/app/business-signup -> sign up form
+```shell
+# Sign Up page:
+https://app-moccona.letsweel.com/app/business-signup
 
-// 2nd page:
-// https://app-moccona.letsweel.com/app/personal-info -> reidrected to login
+# Sign up page 2:
+https://app-moccona.letsweel.com/app/personal-info
 
+# ABN input form:
+https://app-moccona.letsweel.com/app/business-info
+
+# Verify business page:
+https://app-moccona.letsweel.com/app/verify-business
+
+# Login Page:
+https://app-moccona.letsweel.com/app/login
+```
+
+## REST requests
+
+```javascript
 Payload submitted after personal-info page is submitted:
 {"email":"william.stephen.walsh33@work.com","first*name":"William","last_name":"Walsh","phone_number":"+61423443204","date_of_birth":"1990-11-11"}
 fetch("https://develop.api.divipay.com/api/me/", {
@@ -89,9 +99,7 @@ curl 'https://develop.api.divipay.com/authorisation/initiate-step-up/' \
  -H 'sec-fetch-mode: cors' \
  -H 'sec-fetch-site: cross-site' \
  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
-
-// TODO: http redirect to https site should work
-// http://app-moccona.letsweel.com/app/business-signup
+```
 
 // Debug statement - progress to this point
 // await page.pause();
@@ -129,14 +137,6 @@ const browser = await chromium.launch({ headless: false });
 // { username: 'invalidUser', password: 'wrongpass', shouldPass: false },
 // ];
 
-// Invalid emails should be rejected
-//
-// william.work.com
-// william@.com
-// william@work.
-// william@workcom
-// list of Invalid Email Addresses
-
 // App did not reject this email:accepted
 // email@111.222.333.44444 - Invalid email format: the domain part of the email address does not comply with IETF standards.
 // email@example.web -> valid email
@@ -145,7 +145,37 @@ const browser = await chromium.launch({ headless: false });
 // - navigating to "https://app-moccona.letsweel.com/app/business-signup", waiting until "load"
 
 First Name restrictions -> no numbers or special character other than '
-last name restriction -> can have numbers & special character other than '
+last name restriction -> can have numbers & special character other than 'as
 
 expect ().tohaveValue()
 expect ().not.tohaveCount() Count dropdown options
+
+---
+
+App uses cognito to authenticate and authorize users.
+
+![alt text](image.png)
+
+https://app-moccona.letsweel.com/app/business-compliance
+https://app-moccona.letsweel.com/app/business-compliance#landingPage
+
+![alt text](image-1.png)
+
+https://app-moccona.letsweel.com/app/business-compliance#applicantDetails
+
+![alt text](image-2.png)
+
+https://app-moccona.letsweel.com/app/business-compliance#privateCompany_businessDetails
+
+![alt text](image-3.png)
+
+Connection error??
+
+![alt text](image-4.png)
+
+// test all alphabet?
+// Add description to the bad email address giving the reason why its invalid use sendgrid
+
+// import { generateUser } from "../utils/FakerUtil.js";
+// // Generate user data
+// const user = generateUser();

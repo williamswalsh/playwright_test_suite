@@ -59,7 +59,7 @@ test('Email error should appear when email address is not a "work email".', asyn
 });
 
 /**
- * This parameterised test will check the different criteria that is expected of the passwords that should be submitted.
+ * This parameterised test will check the different criteria that is expected of the passwords that are submitted.
  */
 [
   {
@@ -102,7 +102,6 @@ test('Email error should appear when email address is not a "work email".', asyn
   });
 });
 
-// This test expects that the email address already.created.email@work.com already exists.
 test("Email error should appear when email account already exists.", async ({
   page,
 }) => {
@@ -187,24 +186,29 @@ test("Password field when empty must show an error message, the text will be red
   await page.getByTestId("registration-terms").click();
 
   const redHexCode = "#D13B15";
-  let textColor = await page
-    .getByText("at least 8 characters")
-    .getAttribute("color");
-  expect(textColor).toBe(redHexCode);
 
-  textColor = await page.getByText("a number").getAttribute("color");
-  expect(textColor).toBe(redHexCode);
+  await expect(page.getByText("at least 8 characters")).toHaveAttribute(
+    "color",
+    redHexCode
+  );
 
-  textColor = await page.getByText("a special character").getAttribute("color");
-  expect(textColor).toBe(redHexCode);
+  await expect(page.getByText("a number")).toHaveAttribute("color", redHexCode);
 
-  textColor = await page
-    .getByText("upper and lower case")
-    .getAttribute("color");
-  expect(textColor).toBe(redHexCode);
+  await expect(page.getByText("a special character")).toHaveAttribute(
+    "color",
+    redHexCode
+  );
+
+  await expect(page.getByText("upper and lower case")).toHaveAttribute(
+    "color",
+    redHexCode
+  );
 });
 
-// Takes a screenshot to capture personal information page.
+/**
+ * The user should be able to enter a work email and valid password before pressing “Sign up with email”
+ * and navigating to the personal-info page.
+ */
 test("Business Signup success.", async ({ page }) => {
   const workEmail = randomUUIDWorkEmail();
   await page.getByTestId("registration-email").fill(workEmail);

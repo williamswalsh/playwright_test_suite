@@ -1,6 +1,14 @@
 # Useful functions for Playwright
 
 ```javascript
+// Getting an attribute from a role
+const dataActionValue = await page
+  .getByRole("button")
+  .getAttribute("data-action");
+
+// Asserting the value of attribute
+await expect(page.getByRole("button")).toHaveAttribute("data-action", "cancel");
+
 // Taking a screenshot
 await page.screenshot({ path: "fullpage.png", fullPage: true });
 

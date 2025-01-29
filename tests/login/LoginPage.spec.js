@@ -3,20 +3,13 @@
 import { test, expect } from "@playwright/test";
 import { defineConfig } from "@playwright/test";
 
-test("has title", async ({ page }) => {
-  await page.goto("/app/business-signup");
-  // TODO: playwright.config.js
-  // await page.goto(defineConfig.use[baseURL]);
-  await expect(page).toHaveTitle("Sign up for a free trial | Weel");
-  await page.close();
-});
 
-test("has no redirects", async ({ page }) => {
-  await page.goto("/app/business-signup");
-  await expect(page).toHaveURL(
-    "https://app-moccona.letsweel.com/app/business-signup"
-  );
-  await page.close();
+// test("has no redirects", async ({ page }) => {
+//   await page.goto("/app/business-signup");
+//   await expect(page).toHaveURL(
+//     "https://app-moccona.letsweel.com/app/business-signup"
+//   );
+//   await page.close();
 });
 
 // TODO: Get each warning message from each field

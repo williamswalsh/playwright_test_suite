@@ -1,0 +1,143 @@
+[
+  {
+    "day": "0",
+    "monthNum": "1",
+    "year": "1990",
+    "reason": "Day is 0",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "00",
+    "monthNum": "1",
+    "year": "1990",
+    "reason": "Day is 0",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "1",
+    "monthNum": "0",
+    "year": "1990",
+    "reason": "Month is 0",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "1",
+    "monthNum": "00",
+    "year": "1990",
+    "reason": "Month is 0",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "1",
+    "monthNum": "1",
+    "year": "0",
+    "reason": "Year is 0",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "1",
+    "monthNum": "1",
+    "year": "00",
+    "reason": "Year is 0",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "1",
+    "monthNum": "1",
+    "year": "1900",
+    "expectedError": "Please double-check your birth year",
+    "reason": "The current oldest person was born in 1908"
+  },
+  {
+    "day": "01",
+    "monthNum": "01",
+    "year": "1900",
+    "expectedError": "Please double-check your birth year",
+    "reason": "The current oldest person was born in 1908"
+  },
+  {
+    "day": "32",
+    "monthNum": "01",
+    "year": "1990",
+    "reason": "January only has 31 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "29",
+    "monthNum": "02",
+    "year": "1990",
+    "reason": "February only has 29(on a leap year) days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "32",
+    "monthNum": "03",
+    "year": "1990",
+    "reason": "March only has 31 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "31",
+    "monthNum": "04",
+    "year": "1990",
+    "reason": "April only has 30 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "32",
+    "monthNum": "05",
+    "year": "1990",
+    "reason": "May only has 31 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "31",
+    "monthNum": "06",
+    "year": "1990",
+    "reason": "June only has 3 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "32",
+    "monthNum": "07",
+    "year": "1990",
+    "reason": "July only has 31 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "32",
+    "monthNum": "08",
+    "year": "1990",
+    "reason": "August only has 31 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "31",
+    "monthNum": "09",
+    "year": "1990",
+    "reason": "September only has 30 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "32",
+    "monthNum": "10",
+    "year": "1990",
+    "reason": "October only has 31 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+
+  {
+    "day": "31",
+    "monthNum": "11",
+    "year": "1990",
+    "reason": "November only has 30 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "32",
+    "monthNum": "12",
+    "year": "1990",
+    "reason": "December only has 31 days in month",
+    "expectedError": "Please enter a valid date of birth"
+  }
+]
