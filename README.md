@@ -69,6 +69,9 @@ https://app-moccona.letsweel.com/app/login
 - Add description to invalid email addressed giving the reason why its invalid - use sendgrid to check this
 - Use Faker javascript library to generate fake data
 - Create list of valid or invalid domains for a "work email"
+- change the structure of the repo to be:
+  tests/
+  signup
 
 # Things to do
 
