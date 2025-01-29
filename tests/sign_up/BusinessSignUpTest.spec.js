@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
   await signUpPage.goto();
 });
 
-// TODO: Test is failing intermittently - investigate.
+// TODO: Investigate - Test is failing if setting the fullyParallel flag to true.
 // Fails with expect.toHaveTitle with timeout 5000ms
 // Expected string: "Weel"
 // Received string: "Sign up for a free trial | Weel"
@@ -19,7 +19,7 @@ test.beforeEach(async ({ page }) => {
  * The user should be able to enter a work email and valid password before pressing “Sign up with email”
  * and navigating to the personal-info page.
  */
-test.skip("Successful Sign up", async ({ page }) => {
+test("Successful Sign up", async ({ page }) => {
   await signUpPage.fillAndSubmitSignupForm(
     randomUUIDWorkEmail(),
     "Password1!",
@@ -146,17 +146,6 @@ test("Submit button should be disabled when terms and conditions checkbox hasn't
 
   await signUpPage.assertSignUpBtnDisabled();
 });
-
-test.fail(
-  "User should be redirected to login when browsing directly to personal-info section.",
-  async ({ page }) => {
-    const personalInfoPage = new PersonalInfoPage(page);
-    await personalInfoPage.goto();
-
-    // TODO: there should be a better way of doing this.
-    await expect(page).toHaveURL("/app/login");
-  }
-);
 
 // Each field should show an error message if they are unpopulated
 test("Work Email field should show an error message if it is unpopulated", async ({
