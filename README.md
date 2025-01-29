@@ -52,6 +52,11 @@ https://app-moccona.letsweel.com/app/verify-business
 https://app-moccona.letsweel.com/app/login
 ```
 
+### Improvements
+
+- Add description to invalid email addressed giving the reason why its invalid - use sendgrid to check this
+- Use Faker javascript library to generate fake data
+
 ## REST requests
 
 ```javascript
@@ -187,28 +192,14 @@ expect ().not.tohaveCount() Count dropdown options
 
 App uses cognito to authenticate and authorize users.
 
-![alt text](image.png)
-
-https://app-moccona.letsweel.com/app/business-compliance
 https://app-moccona.letsweel.com/app/business-compliance#landingPage
-
-![alt text](image-1.png)
+![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_landing_page.png)
 
 https://app-moccona.letsweel.com/app/business-compliance#applicantDetails
-
-![alt text](image-2.png)
+![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_applicant_details.png)
 
 https://app-moccona.letsweel.com/app/business-compliance#privateCompany_businessDetails
-
-![alt text](image-3.png)
+![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_business_details.png)
 
 Connection error??
-
-![alt text](image-4.png)
-
-// test all alphabet?
-// Add description to the bad email address giving the reason why its invalid use sendgrid
-
-// import { generateUser } from "../utils/FakerUtil.js";
-// // Generate user data
-// const user = generateUser();
+![alt text](tests/screenshots/outside_scope_of_testing/business_compliance_business_details_connection_error.png)
