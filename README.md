@@ -63,6 +63,8 @@ https://app-moccona.letsweel.com/app/login
   Error: page.goto: net::ERR_INTERNET_DISCONNECTED at
   https://app-moccona.letsweel.com/app/business-signup
   ```
+- When submitting an extra long lastname 10000+ characters UI became unresponsive. Front end should not allow lastname to be this long. Server checks lastname and rejects it. Video of behaviour:
+  [Unresponsive UI with long lastname](extra_long_lastname_slows_down_ui_nearly_unresponsive_no_response.mov)
 
 ### Improvements
 
