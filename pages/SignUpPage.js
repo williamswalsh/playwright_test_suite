@@ -1,24 +1,25 @@
 import { expect } from "@playwright/test";
+import { randomUUIDWorkEmail } from "../tests/utils/Randomize";
 
 export class SignUpPage {
   constructor(page) {
     this.page = page;
-    this.emailField = page.getByTestId("registration-email");
-    this.submitBtn = page.getByTestId("submit-button");
-    this.passwordField = page.getByTestId("registration-password");
-    this.termsCheckbox = page.getByTestId("registration-terms");
-    this.signUpBtn = page.getByTestId("email-sign-up");
-    this.emailAlreadyRegisteredError = page
+    this.emailField = this.page.getByTestId("registration-email");
+    this.submitBtn = this.page.getByTestId("submit-button");
+    this.passwordField = this.page.getByTestId("registration-password");
+    this.termsCheckbox = this.page.getByTestId("registration-terms");
+    this.signUpBtn = this.page.getByTestId("email-sign-up");
+    this.emailAlreadyRegisteredError = this.page
       .getByTestId("registration-email-subtext-container")
       .locator("span")
       .getByText("This account already exists.");
-    this.nonWorkEmailErrorMessage = page
+    this.nonWorkEmailErrorMessage = this.page
       .getByTestId("form-input-wrapper-error-text")
       .getByText("Please try again with your work email address");
-    this.emailBlankErrorMessage = page
+    this.emailBlankErrorMessage = this.page
       .getByTestId("form-input-wrapper-error-text")
       .getByText("Please enter an email address.");
-    this.loginToContinueLink = page.getByTestId("login-to-continue-link");
+    this.loginToContinueLink = this.page.getByTestId("login-to-continue-link");
 
     this.redHexCode = "#D13B15";
   }
@@ -38,7 +39,7 @@ export class SignUpPage {
     await this.submitBtn.click();
 
     await this.passwordField.fill(password);
-    if (checked) {
+    if (await checked) {
       await this.termsCheckbox.check();
     }
   }
@@ -51,6 +52,14 @@ export class SignUpPage {
     if (await checked) {
       await this.termsCheckbox.check();
     }
+    await this.signUpBtn.click();
+  }
+
+  async fillAndSubmitValidSignupForm() {
+    await this.emailField.fill(randomUUIDWorkEmail());
+    await this.submitBtn.click();
+    await this.passwordField.fill("Password1!");
+    await this.termsCheckbox.check();
     await this.signUpBtn.click();
   }
 

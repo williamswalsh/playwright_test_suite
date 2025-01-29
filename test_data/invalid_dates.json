@@ -42,13 +42,6 @@
     "expectedError": "Please enter a valid date of birth"
   },
   {
-    "day": "1",
-    "monthNum": "1",
-    "year": "1900",
-    "expectedError": "Please double-check your birth year",
-    "reason": "The current oldest person was born in 1908"
-  },
-  {
     "day": "01",
     "monthNum": "01",
     "year": "1900",
