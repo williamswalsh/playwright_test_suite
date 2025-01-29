@@ -139,5 +139,19 @@
     "year": "1990",
     "reason": "December only has 31 days in month",
     "expectedError": "Please enter a valid date of birth"
+  },
+  {
+    "day": "01",
+    "monthNum": "01",
+    "year": "2020",
+    "reason": "The user is under 18, which is unallowed.",
+    "expectedError": "You must be 18 years or older to use Weel"
+  },
+  {
+    "day": "01",
+    "monthNum": "13",
+    "year": "1990",
+    "reason": "The month value is 13, there are only 12 months in the year.",
+    "expectedError": "Please enter a valid date of birth"
   }
 ]

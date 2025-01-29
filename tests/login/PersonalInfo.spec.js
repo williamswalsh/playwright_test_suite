@@ -2,7 +2,7 @@
 import { test, expect } from "@playwright/test";
 import { randomWorkEmail } from "../utils/Randomize.js";
 import { COMMON_SPECIAL_CHARACTERS } from "../utils/constants.js";
-import { daysInMonth } from "../utils/DateUtils.js";
+import { getTodaysDate, getTomorrowsDate } from "../utils/DateUtils.js";
 import invalid_dates from "../../test_data/invalid_dates.json";
 
 const VERY_LONG_LAST_NAME =
@@ -270,11 +270,11 @@ test("Phone number field strips any plus characters '+' if they are not at the b
 });
 
 /**
- * This parameterised test reads data from a json file which contains input data and the expected error messages from the website.
+ * This parameterised test reads data from a json file which contains input data and the expected error messages.
  * I originally stored the json object in the test file but it made the test file overly verbose.
  */
 invalid_dates.forEach((data) => {
-  test.only(`Tests with: ${data.day}-${data.monthNum}-${data.year}`, async ({
+  test(`Tests with: ${data.day}-${data.monthNum}-${data.year}. Date is invalid because: ${data.reason}`, async ({
     page,
   }) => {
     await page.fill('input[name="day"]', `${data.day}`);
@@ -285,69 +285,38 @@ invalid_dates.forEach((data) => {
   });
 });
 
-// /`Date error should display when submitting invalid date to the date forms. DATE: ${day}-${monthNum}-${year}`,
+test("Tests with current date. User needs to be 18+.", async ({ page }) => {
+  const date = getTodaysDate();
 
-// test.each(testData)(
-//   "Test with : $day $month $year",
-//   async ({ page, day, monthNum, year }) => {
+  await page.fill('input[name="day"]', `${date.day}`);
+  await page.fill('input[name="month"]', `${date.month}`);
+  await page.fill('input[name="year"]', `${date.year}`);
 
-//     // await expect(
-//     //   page.getByText("Please enter a valid date of birth")
-//     // ).toBeVisible();
-//   }
-// );
+  await expect(
+    page.getByText("You must be 18 years or older to use Weel")
+  ).toBeVisible();
+});
 
-// test.each(testData)(
-//   "Login test with username: $username",
-//   async (
-//     { page },
-//     { username, password, expectedUrl, expectedError, expectedOutcome }
-//   ) => {
-//     await page.fill("#username", username);
-//     await page.fill("#password", password);
-//     await page.click("#login-button");
+test("Tests with tomorrows date. Cannot have date in future.", async ({
+  page,
+}) => {
+  const date = getTomorrowsDate();
 
-//     if (expectedOutcome === "pass") {
-//       // If test is expected to pass, verify the success case
-//       await expect(page).toHaveURL(expectedUrl);
-//     } else if (expectedOutcome === "fail") {
-//       // If test is expected to fail, verify error message
-//       await expect(page.locator(".error-message")).toHaveText(expectedError);
-//     }
-//   }
-// );
+  await page.fill('input[name="day"]', `${date.day}`);
+  await page.fill('input[name="month"]', `${date.month}`);
+  await page.fill('input[name="year"]', `${date.year}`);
 
-// 18+ test
-
-// Have to test the day, month and year field together as they are connected(coupled) together.
-// test.only("Date of Birth fields", async ({ page }) => {
-//   daysInMonth(7, 2009); // 31
-
-//   await page.fill('input[name="day"]', "26");
-//   await page.fill('input[name="day"]', "26");
-//   await page.fill('input[name="month"]', "10");
-//   await page.fill('input[name="year"]', "1980");
-
-//   let day = await page.locator('input[name="day"]').inputValue();
-
-//   expect(day).toBe("26");
-// });
+  await expect(
+    page.getByText("You must be 18 years or older to use Weel")
+  ).toBeVisible();
+});
 
 test("Happy path", async ({ page }) => {
   await page.getByTestId("input-first-name").fill("William");
   await page.getByTestId("input-last-name").fill("Walsh");
   await page.selectOption("select.PhoneInputCountrySelect", "AU");
-
-  //   await page.pause();
-
-  //   TODO: Do a failing case for the phone number
-  // Helper function: isValidPhoneNumber?
   await page.fill("input.PhoneInputInput", "0423444444");
 
-  //   await page.pause();
-
-  // TODO: Failing case entering non valid numbers like day - 0, 32+, month 0, 13+, year not future year valid values > age restrictions?
-  // TODO: Failing case entering non numbers
   // TODO: Failing case entering decimals
   // TODO: Failing case - etc.
   await page.fill('input[name="day"]', "26");
