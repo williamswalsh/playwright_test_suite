@@ -159,18 +159,6 @@ export class PersonalInfoPage {
     return this.incorrectNumberForCountry.isVisible();
   }
 
-  //   async assertLoginToContinueLinkIsVisible() {
-  //     await expect(this.loginToContinueLink).toBeVisible();
-  //   }
-
-  //   async assertNonWorkEmailMessage() {
-  //     await expect(this.nonWorkEmailErrorMessage).toBeVisible();
-  //   }
-
-  //   async assertSignUpBtnDisabled() {
-  //     await expect(this.signUpBtn).toBeDisabled();
-  //   }
-
   async clearCookies() {
     await this.page.context().clearCookies();
   }
