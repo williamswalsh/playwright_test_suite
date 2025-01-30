@@ -69,29 +69,6 @@ https://app-moccona.letsweel.com/app/login
 - Create list of valid or invalid domains for a "work email"
 - change the structure of the repo so tests folder doesn't contain screenshots & utils folders.
 
-# Things to do
-
-```javascript
-// Understand why the option to launch in headless mode is created in the script itself and not via command line
-// Doesn't seem like a good idea
-const browser = await chromium.launch({ headless: false });
-```
-
-// TODO: Understand the object hierarchy - chromium->context->page etc..
-// Should I be constructing those objects
-// how to construct them with cross browser tests?
-
-// Call log:
-// - navigating to "https://app-moccona.letsweel.com/app/business-signup", waiting until "load"
-
-First Name restrictions -> no numbers or special character other than '
-last name restriction -> can have numbers & special character other than 'as
-
-expect ().tohaveValue()
-expect ().not.tohaveCount() Count dropdown options
-
----
-
 App uses cognito to authenticate and authorize users.
 
 https://app-moccona.letsweel.com/app/business-compliance#landingPage
