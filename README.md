@@ -29,6 +29,93 @@ npx playwright test --debug --project=chromium
 ./playwright.config.js - Playwright Test configuration
 ```
 
+### Extra manual test cases
+
+**This is the manual testing that I did:**
+
+- Checking the behaviour of the form & errors in each browser chrome, safari separately
+- Test application in an incognito browser - removes session data & cookies
+
+**positive testing**
+
+- checking that valid input is accepted as expected.
+
+**negative testing**  
+checking that invalid input is rejected and an error message stating the reason is displayed to the user.  
+Ensuring that buttons are still disabled while the input in the form is invalid somehow - terms & conditions checkbox is disabled  
+Checking that the phone input can accept numbers with the country code prefix inside the form - does the backend strip this?
+
+**Boundary testing:**
+
+- checking the min max length of the different fields - lastname field form field accepts any length of text - server rejects the text.
+- At what max length do the inputs reject or does the server reject the input.
+- At what min length do the inputs reject or does the server reject the input.
+
+**Accessibility testing:**
+
+- Checking if the colours of the text & background are accessible.  
+  Using the Lighthouse chrome dev tools feature to check the page for accessibility/performance issues.
+- The weel logo above the “try weel free today” text is missing an alt attribute. Which is essential for screen readers.
+- The xero logo beside the “sign up with xero” text is missing an alt attribute. Which is essential for screen readers.
+
+**Mobile testing:**
+
+- Browsing to the website on my personal device (iOS)
+
+**Usability testing:**
+
+- Check where I could click an element - if I could click where I expect the element to be clickable or not.
+- Check if I can use a password manager program like LastPass or icloud keychain with the website.
+- Checking if I can tab through the form fields to fill the form without any mouse.
+
+**Defect:**  
+The contrast ratio needs to be increased for these elements on the personal-info page:
+![alt text](image-1.png)
+
+### If I had more time I would:
+
+**Security testing**
+
+- I would try to submit sql injection strings into the forms to see if the front end or server is escaping the input before placing the values in an sql query.
+- Password testing with common passwords which are insecure like Password1!
+
+**API testing**
+
+- bypass the front end and pass json payloads directly to the API to see if I can force an error or understand if the app is vulnerable to different attack, like a DOS attack or sql injection, etc.
+
+**Browser testing:**
+
+- Test with brave and opera and edge
+
+**OS testing:**
+
+- Browsing to the website on my mac & windows devices - no browser-os specific issue.
+
+**Android testing:**
+
+- Test using an android device.
+  (Android had a market share of about 72.04%, while Apple's iOS had a market share of about 27.49%)
+
+**Extra automation test:**
+
+- Using Playwright to browse to the site using a viewport matching the latest IPhone & Android phones & checking the behaviour.
+
+**Fuzz testing**
+
+- use a fuzz testing tool to fuzz test the forms.
+
+**Performance test**
+
+- Use playwright/Gatling to do performance testing
+
+### Defect:
+
+On iOS 18.2.1 Chrome 132.0.6834.100:  
+When entering a lastname with numbers and letters the form submits ok but then no error is displayed on the screen.
+![alt text](image.png)
+
+````
+
 ### Sitemap
 
 ```shell
@@ -46,7 +133,7 @@ https://app-moccona.letsweel.com/app/verify-business
 
 # Login Page:
 https://app-moccona.letsweel.com/app/login
-```
+````
 
 ### Information
 

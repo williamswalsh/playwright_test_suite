@@ -34,7 +34,8 @@ export class PersonalInfoPage {
 
   async goto() {
     await this.page.goto(
-      "https://app-moccona.letsweel.com/app/business-signup"
+      "https://app-moccona.letsweel.com/app/business-signup",
+      { waitUntil: "commit" }
     );
   }
 
