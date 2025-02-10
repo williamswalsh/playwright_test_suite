@@ -15,6 +15,11 @@ npx playwright test
 # Execute the tests in a specific file - tests/example.spec.js
 npx playwright test example
 
+# Execute only the changed tests on the main branch
+# Run them 100 times to test for flakiness before submitting them to CI/CD 
+npx playwright test --repeat-each 100 --only-changed=main
+
+
 # Starts the interactive UI mode
 npx playwright test --ui
 
